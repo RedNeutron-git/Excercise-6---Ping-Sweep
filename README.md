@@ -13,7 +13,7 @@ for /L %i in (1,1,255) do @ping -n 1 -w 200 172.17.1.%i > nul && echo 172.17.1.%
 
 ## Powershell
 ``` powershell
-1..255 | % {echo "172.17.1.$_"; ping -n 1 -w 172.17.1.$_ | Select-String ttl }
+@(1..255 | % {echo "192.168.88.$_"; ping -n 1 -w 192.168.88.$_ | Select-String ttl }) | % { if (Test-Connection $_ -Count 1 -Quiet) { "$_ is UP" } else { "$_ is DOWN" } }
 ```
 
 ## NMap
